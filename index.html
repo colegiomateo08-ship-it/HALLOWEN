@@ -3,56 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Regalo - Cubo 3D Interactivo</title>
+  <title>Regalo - Cubo 3D</title>
 
   <style>
-    body {
-      background-color: #1a1a1a;
-      background-image: url('imagenes/fondo.png'), url('imagenes/fm.png');
-      background-size: cover, 60px 60px;
-      background-position: bottom left, top right;
-      background-repeat: no-repeat;
-      font-family: "Poppins", sans-serif;
-      text-align: center;
-      overflow-x: hidden;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+   body {
+  background-color: #1a1a1a; /* Oscuro para Halloween */
+  background-image: url('imagenes/fondo.png'), url('imagenes/fm.png'); /* Imagen de fondo */
+  background-size: cover, 50px 50px; /* Ocupa todo el fondo */
+  background-position: botton left, top right, center top;
+  background-repeat: no-repeat;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+  color: #fff; /* Para que el texto sea visible sobre fondo oscuro */
+}
 
     .container {
-      width: 100%;
-      max-width: 500px;
-      padding: 20px;
+      margin-top: 30px;
     }
 
-    .halloween-title {
-      animation: halloweenGlow 2s infinite;
-      font-size: 2.5em;
-      margin-bottom: 25px;
-    }
-
-    @keyframes halloweenGlow {
-      0%   { color: #ff7518; text-shadow: 0 0 5px #ff7518; }
-      25%  { color: #ffeb3b; text-shadow: 0 0 10px #ffeb3b; }
-      50%  { color: #ff7518; text-shadow: 0 0 15px #ff7518; }
-      75%  { color: #ffeb3b; text-shadow: 0 0 10px #ffeb3b; }
-      100% { color: #ff7518; text-shadow: 0 0 5px #ff7518; }
+    .title {
+      font-size: 2em;
+      color: #e63946;
     }
 
     .scene {
-      width: 80vw;
-      height: 80vw;
-      max-width: 250px;
-      max-height: 250px;
+      width: 200px;
+      height: 200px;
       perspective: 600px;
-      margin: 0 auto;
-      touch-action: none; /* importante para evitar desplazamientos al arrastrar */
+      margin: 50px auto;
     }
 
     .cube-wrapper {
@@ -72,12 +51,10 @@
 
     .face {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      width: 200px;
+      height: 200px;
       border: 2px solid #fff;
       background: #000;
-      border-radius: 8px;
-      overflow: hidden;
     }
 
     .face img {
@@ -86,12 +63,12 @@
       object-fit: cover;
     }
 
-    .face-front  { transform: translateZ(50%); }
-    .face-back   { transform: rotateY(180deg) translateZ(50%); }
-    .face-right  { transform: rotateY(90deg) translateZ(50%); }
-    .face-left   { transform: rotateY(-90deg) translateZ(50%); }
-    .face-top    { transform: rotateX(90deg) translateZ(50%); }
-    .face-bottom { transform: rotateX(-90deg) translateZ(50%); }
+    .face-front  { transform: translateZ(100px); }
+    .face-back   { transform: rotateY(180deg) translateZ(100px); }
+    .face-right  { transform: rotateY(90deg) translateZ(100px); }
+    .face-left   { transform: rotateY(-90deg) translateZ(100px); }
+    .face-top    { transform: rotateX(90deg) translateZ(100px); }
+    .face-bottom { transform: rotateX(-90deg) translateZ(100px); }
 
     @keyframes spin {
       from { transform: rotateX(-20deg) rotateY(0deg); }
@@ -99,54 +76,46 @@
     }
 
     .controls {
-      margin-top: 25px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
+      margin-top: 30px;
     }
 
     button {
       background-color: #ff6f00;
       border: none;
       padding: 10px 15px;
+      margin: 5px;
       border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 1rem;
-      color: white;
-      transition: background-color 0.2s ease;
     }
 
     button:hover {
       background-color: #f28ea2;
     }
+	/* Animación de título de Halloween */
+@keyframes halloweenGlow {
+  0%   { color: #ff7518; text-shadow: 0 0 5px #ff7518; }
+  25%  { color: #ffeb3b; text-shadow: 0 0 10px #ffeb3b; }
+  50%  { color: #ff7518; text-shadow: 0 0 15px #ff7518; }
+  75%  { color: #ffeb3b; text-shadow: 0 0 10px #ffeb3b; }
+  100% { color: #ff7518; text-shadow: 0 0 5px #ff7518; }
+}
 
-    @media (max-width: 480px) {
-      .halloween-title {
-        font-size: 1.8em;
-      }
-
-      .scene {
-        width: 90vw;
-        height: 90vw;
-        max-width: 230px;
-        max-height: 230px;
-      }
-
-      button {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-      }
-    }
+.halloween-title {
+  animation: halloweenGlow 2s infinite;
+  font-size: 2.5em; /* más grande y llamativo */
+  margin-bottom: 30px;
+}
   </style>
 </head>
+ <br> <br>
+</br> </br>
 
 <body>
   <main class="container">
-    <h1 class="halloween-title">¡Feliz Halloween 🎃!</h1>
-
-    <div class="scene" id="scene">
+    <h1 class="title halloween-title">¡Feliz Halloween 🎃!</h1>
+ <br> <br>
+    <div class="scene">
       <div id="cubeWrapper" class="cube-wrapper">
         <div id="cube" class="cube">
           <div class="face face-front"><img src="imagenes/uno.jpg" alt="frontal"></div>
@@ -158,7 +127,7 @@
         </div>
       </div>
     </div>
-
+ <br> <br>
     <div class="controls">
       <button id="btnToggleSpin">Detener Rotación</button>
       <button id="btnReset">Resetear</button>
@@ -172,21 +141,14 @@
     const cube = document.getElementById('cube');
     const music = document.getElementById('music');
     let spinning = true;
-    let isDragging = false;
-    let lastX, lastY;
-    let rotationX = -20;
-    let rotationY = 30;
 
-    // Botones
     document.getElementById('btnToggleSpin').addEventListener('click', () => {
       spinning = !spinning;
       cube.style.animationPlayState = spinning ? 'running' : 'paused';
     });
 
     document.getElementById('btnReset').addEventListener('click', () => {
-      rotationX = -20;
-      rotationY = 30;
-      cube.style.transform = rotateX(${rotationX}deg) rotateY(${rotationY}deg);
+      cube.style.transform = 'rotateX(-20deg) rotateY(30deg)';
     });
 
     document.getElementById('btnPlayPause').addEventListener('click', () => {
@@ -196,43 +158,6 @@
         music.pause();
       }
     });
-
-    // Interacción táctil / mouse
-    const scene = document.getElementById('scene');
-
-    function startDrag(e) {
-      isDragging = true;
-      lastX = e.touches ? e.touches[0].clientX : e.clientX;
-      lastY = e.touches ? e.touches[0].clientY : e.clientY;
-      cube.style.animationPlayState = 'paused';
-    }
-
-    function onDrag(e) {
-      if (!isDragging) return;
-      const currentX = e.touches ? e.touches[0].clientX : e.clientX;
-      const currentY = e.touches ? e.touches[0].clientY : e.clientY;
-      const deltaX = currentX - lastX;
-      const deltaY = currentY - lastY;
-      rotationY += deltaX * 0.4;
-      rotationX -= deltaY * 0.4;
-      cube.style.transform = rotateX(${rotationX}deg) rotateY(${rotationY}deg);
-      lastX = currentX;
-      lastY = currentY;
-    }
-
-    function endDrag() {
-      isDragging = false;
-    }
-
-    // Eventos
-    scene.addEventListener('mousedown', startDrag);
-    scene.addEventListener('mousemove', onDrag);
-    scene.addEventListener('mouseup', endDrag);
-    scene.addEventListener('mouseleave', endDrag);
-
-    scene.addEventListener('touchstart', startDrag);
-    scene.addEventListener('touchmove', onDrag);
-    scene.addEventListener('touchend', endDrag);
   </script>
 </body>
 </html>
