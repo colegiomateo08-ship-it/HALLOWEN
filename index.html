@@ -40,9 +40,10 @@ body {
 }
 
 .title {
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-size: clamp(2rem, 7vw, 3rem);
   color: #e63946;
   animation: halloweenGlow 2s infinite;
+  margin: 0;
 }
 
 @keyframes halloweenGlow {
@@ -84,7 +85,7 @@ body {
   transform: rotateX(-20deg) rotateY(30deg);
   animation: spin 10s linear infinite;
   will-change: transform;
-  touch-action: none; /* evita scroll accidental */
+  touch-action: none;
 }
 
 .face {
@@ -121,8 +122,9 @@ body {
 .controls {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: nowrap; /* todos en una línea */
 }
 
 button {
@@ -135,13 +137,13 @@ button {
   color: #000;
   font-size: 1rem;
   transition: background-color 0.3s;
+  min-width: 110px;
 }
 
 button:hover {
   background-color: #f28ea2;
 }
 
-/* ==== Responsive ==== */
 @media (max-width: 600px) {
   body {
     background-size: cover, 60px 60px;
@@ -152,13 +154,9 @@ button:hover {
   .cube {
     animation: spin 12s linear infinite;
   }
-}
-
-@media (max-height: 700px) {
-  .container {
-    justify-content: flex-start;
-    gap: 1rem;
-    padding-top: 30px;
+  button {
+    padding: 10px 12px;
+    font-size: 0.9rem;
   }
 }
 </style>
@@ -181,9 +179,9 @@ button:hover {
     </div>
 
     <div class="controls">
-      <button id="btnToggleSpin">Detener Rotación</button>
+      <button id="btnToggleSpin">Rotar</button>
       <button id="btnReset">Resetear</button>
-      <button id="btnPlayPause">🎵 Reproducir</button>
+      <button id="btnPlayPause">🎵 Música</button>
     </div>
 
     <audio id="music" src="audio/october.mp3" preload="auto"></audio>
@@ -211,13 +209,13 @@ document.getElementById('btnReset').addEventListener('click', () => {
 
 document.getElementById('btnPlayPause').addEventListener('click', () => {
   if (music.paused) {
-    music.play().catch(() => {}); // evita error en Safari
+    music.play().catch(() => {});
   } else {
     music.pause();
   }
 });
 
-/* === Control táctil === */
+/* === Control táctil para móviles === */
 cube.addEventListener('touchstart', e => {
   isDragging = true;
   spinning = false;
