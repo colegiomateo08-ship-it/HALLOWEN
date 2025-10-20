@@ -87,7 +87,8 @@ body {
   animation-play-state: running;
   will-change: transform;
   touch-action: none;
-  transition: transform 0.1s linear;
+  transition: transform 0.05s linear;
+  user-select: none;
 }
 
 .face {
@@ -189,7 +190,6 @@ button:hover {
     <audio id="music" src="audio/october.mp3" preload="auto" playsinline></audio>
   </main>
 
-<script>
 const cube = document.getElementById('cube');
 const music = document.getElementById('music');
 let spinning = true;
@@ -206,12 +206,10 @@ document.getElementById('btnToggleSpin').addEventListener('click', () => {
 document.getElementById('btnReset').addEventListener('click', () => {
   rotateX = -20;
   rotateY = 30;
-  cube.style.transform = 'rotateX(${rotateX}deg) rotateY(${rotateY}deg)';
+  cube.style.transform = rotateX(${rotateX}deg) rotateY(${rotateY}deg);
 });
 
-const btnPlayPause = document.getElementById('btnPlayPause');
-
-btnPlayPause.addEventListener('click', async () => {
+document.getElementById('btnPlayPause').addEventListener('click', async () => {
   try {
     if (music.paused) {
       await music.play();
@@ -225,10 +223,10 @@ btnPlayPause.addEventListener('click', async () => {
   }
 });
 
-/* === Control táctil para móviles === */
+/* === Control táctil === */
 cube.addEventListener('touchstart', e => {
+  e.preventDefault(); // evita desplazamiento de página
   isDragging = true;
-  spinning = false;
   cube.style.animationPlayState = 'paused';
   const touch = e.touches[0];
   startX = touch.clientX;
@@ -237,19 +235,22 @@ cube.addEventListener('touchstart', e => {
 
 cube.addEventListener('touchmove', e => {
   if (!isDragging) return;
+  e.preventDefault();
   const touch = e.touches[0];
   const deltaX = touch.clientX - startX;
   const deltaY = touch.clientY - startY;
   rotateY += deltaX * 0.3;
   rotateX -= deltaY * 0.3;
-  cube.style.transform = 'rotateX(${rotateX}deg) rotateY(${rotateY}deg)';
+  cube.style.transform = rotateX(${rotateX}deg) rotateY(${rotateY}deg);
   startX = touch.clientX;
   startY = touch.clientY;
 });
 
 cube.addEventListener('touchend', () => {
   isDragging = false;
+  // 🔄 vuelve a girar automáticamente al soltar el dedo
+  spinning = true;
+  cube.style.animationPlayState = 'running';
 });
-</script>
 </body>
 </html>
