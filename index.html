@@ -189,7 +189,7 @@ button:hover {
 
     <audio id="music" src="audio/october.mp3" preload="auto" playsinline></audio>
   </main>
-
+<script>
 const cube = document.getElementById('cube');
 const music = document.getElementById('music');
 let spinning = true;
@@ -252,5 +252,6 @@ cube.addEventListener('touchend', () => {
   spinning = true;
   cube.style.animationPlayState = 'running';
 });
+</script>
 </body>
 </html>
