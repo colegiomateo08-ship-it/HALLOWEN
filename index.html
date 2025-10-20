@@ -32,9 +32,9 @@
     }
 
     .scene {
-      width: 200px;
-      height: 200px;
-      perspective: 600px;
+      width: 250px;
+      height: 250px;
+      perspective: 700px;
       margin: 50px auto;
     }
 
@@ -55,8 +55,8 @@
 
     .face {
       position: absolute;
-      width: 200px;
-      height: 200px;
+      width: 250px;
+      height: 250px;
       border: 2px solid #fff;
       background: #000;
     }
@@ -67,12 +67,12 @@
       object-fit: cover;
     }
 
-    .face-front  { transform: translateZ(100px); }
-    .face-back   { transform: rotateY(180deg) translateZ(100px); }
-    .face-right  { transform: rotateY(90deg) translateZ(100px); }
-    .face-left   { transform: rotateY(-90deg) translateZ(100px); }
-    .face-top    { transform: rotateX(90deg) translateZ(100px); }
-    .face-bottom { transform: rotateX(-90deg) translateZ(100px); }
+    .face-front  { transform: translateZ(125px); }
+    .face-back   { transform: rotateY(180deg) translateZ(125px); }
+    .face-right  { transform: rotateY(90deg) translateZ(125px); }
+    .face-left   { transform: rotateY(-90deg) translateZ(125px); }
+    .face-top    { transform: rotateX(90deg) translateZ(125px); }
+    .face-bottom { transform: rotateX(-90deg) translateZ(125px); }
 
     @keyframes spin {
       from { transform: rotateX(-20deg) rotateY(0deg); }
