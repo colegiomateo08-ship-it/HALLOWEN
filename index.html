@@ -32,50 +32,74 @@
     }
 
  :root {
-  /* Tamaño dinámico del cubo: usa 80vw en móviles, pero no más de 250px */
-  --cube-size: min(80vw, 250px);
+  --cube-size: min(70vw, 250px);
   --half-cube: calc(var(--cube-size) / 2);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .scene {
   width: var(--cube-size);
   height: var(--cube-size);
-  perspective: 700px;
-  margin: 50px auto;
+  perspective: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  overflow: visible;
 }
 
 .cube-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
+  transform-origin: center center;
+  overflow: visible;
 }
 
 .cube {
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
   transform-style: preserve-3d;
+  transform-origin: center center;
   transform: rotateX(-20deg) rotateY(30deg);
-  animation: spin 10s infinite linear;
+  animation: spin 10s linear infinite;
+  will-change: transform;
 }
 
 .face {
   position: absolute;
   width: var(--cube-size);
   height: var(--cube-size);
-  border: 2px solid #fff;
   background: #000;
-  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 6px;
+  box-sizing: border-box;
   overflow: hidden;
+  backface-visibility: hidden; /* mejora en móviles */
 }
 
 .face img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-/* Posicionamiento 3D del cubo */
 .face-front  { transform: translateZ(var(--half-cube)); }
 .face-back   { transform: rotateY(180deg) translateZ(var(--half-cube)); }
 .face-right  { transform: rotateY(90deg) translateZ(var(--half-cube)); }
@@ -83,10 +107,19 @@
 .face-top    { transform: rotateX(90deg) translateZ(var(--half-cube)); }
 .face-bottom { transform: rotateX(-90deg) translateZ(var(--half-cube)); }
 
-/* Animación */
 @keyframes spin {
   from { transform: rotateX(-20deg) rotateY(0deg); }
   to   { transform: rotateX(-20deg) rotateY(360deg); }
+}
+
+/* Margen y perspectiva extra para pantallas pequeñas */
+@media (max-width: 480px) {
+  .scene {
+    perspective: 700px;
+  }
+  .cube {
+    animation: spin 12s linear infinite;
+  }
 }
     .controls {
       margin-top: 30px;
