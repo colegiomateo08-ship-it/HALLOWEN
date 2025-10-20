@@ -83,7 +83,7 @@ body {
   height: 100%;
   transform-style: preserve-3d;
   transform: rotateX(-20deg) rotateY(30deg);
-  animation: spin 10s linear infinite;
+  animation: spin 8s linear infinite;
   will-change: transform;
   touch-action: none;
 }
@@ -179,12 +179,12 @@ button:hover {
     </div>
 
     <div class="controls">
-      <button id="btnToggleSpin">Rotar</button>
-      <button id="btnReset">Resetear</button>
-      <button id="btnPlayPause">🎵 Música</button>
+      <button type="button" id="btnToggleSpin">Rotar</button>
+      <button type="button" id="btnReset">Resetear</button>
+      <button type="button" id="btnPlayPause">🎵 Música</button>
     </div>
 
-    <audio id="music" src="audio/october.mp3" preload="auto"></audio>
+    <audio id="music" src="audio/october.mp3" preload="auto" playsinline></audio>
   </main>
 
 <script>
@@ -204,14 +204,22 @@ document.getElementById('btnToggleSpin').addEventListener('click', () => {
 document.getElementById('btnReset').addEventListener('click', () => {
   rotateX = -20;
   rotateY = 30;
-  cube.style.transform = rotateX(${rotateX}deg) rotateY(${rotateY}deg);
+  cube.style.transform = 'rotateX(${rotateX}deg) rotateY(${rotateY}deg)';
 });
 
-document.getElementById('btnPlayPause').addEventListener('click', () => {
-  if (music.paused) {
-    music.play().catch(() => {});
-  } else {
-    music.pause();
+const btnPlayPause = document.getElementById('btnPlayPause');
+
+btnPlayPause.addEventListener('click', async () => {
+  try {
+    if (music.paused) {
+      await music.play();
+      btnPlayPause.textContent = '⏸ Pausar';
+    } else {
+      music.pause();
+      btnPlayPause.textContent = '🎵 Música';
+    }
+  } catch (err) {
+    console.warn('Error reproduciendo audio:', err);
   }
 });
 
@@ -232,7 +240,7 @@ cube.addEventListener('touchmove', e => {
   const deltaY = touch.clientY - startY;
   rotateY += deltaX * 0.3;
   rotateX -= deltaY * 0.3;
-  cube.style.transform = rotateX(${rotateX}deg) rotateY(${rotateY}deg);
+  cube.style.transform = 'rotateX(${rotateX}deg) rotateY(${rotateY}deg)';
   startX = touch.clientX;
   startY = touch.clientY;
 });
