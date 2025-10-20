@@ -121,7 +121,26 @@ body {
     animation: spin 12s linear infinite;
   }
 }
+/* Ajuste para pantallas grandes (PC y laptops) */
+@media (min-width: 768px) {
+  :root {
+    --cube-size: 300px; /* cubo un poco más grande en escritorio */
+    --half-cube: calc(var(--cube-size) / 2);
+  }
 
+  .scene {
+    margin-top: 60px; /* más espacio arriba */
+    perspective: 1000px; /* perspectiva más profunda */
+  }
+
+  .halloween-title {
+    margin-bottom: 40px;
+  }
+
+  body {
+    overflow: hidden; /* evita scroll por perspectiva */
+  }
+}
     .controls {
       margin-top: 30px;
     }
