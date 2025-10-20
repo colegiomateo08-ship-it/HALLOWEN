@@ -126,36 +126,19 @@ body {
       margin-top: 30px;
     }
 
-    /* ==== Estilos uniformes para botones ==== */
-button {
-  background-color: #ff6f00; /* Naranja Halloween 🎃 */
-  border: none;
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1rem;
-  color: white;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  -webkit-tap-highlight-color: transparent; /* elimina el brillo azul al tocar en móviles */
-}
+   button {
+      background-color: #ff6f00;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-/* Efecto al pasar el mouse (PC) */
-button:hover {
-  background-color: #ff9f43; /* Naranja más claro */
-}
-
-/* Efecto al tocar o presionar (móviles y PC) */
-button:active {
-  background-color: #f28ea2; /* rosado al presionar */
-  transform: scale(0.96); /* efecto de presión */
-}
-
-/* Evita borde azul al hacer clic */
-button:focus {
-  outline: none;
-}
+    button:hover {
+      background-color: #f28ea2;
+    }
 	/* Animación de título de Halloween */
 @keyframes halloweenGlow {
   0%   { color: #ff7518; text-shadow: 0 0 5px #ff7518; }
