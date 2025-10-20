@@ -32,42 +32,52 @@
     }
 
  :root {
-  --cube-size: min(85vw, 250px);
+  --cube-size: min(70vw, 250px);
   --half-cube: calc(var(--cube-size) / 2);
 }
 
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden; /* evita recortes por desplazamiento */
+  overflow: hidden;
   background-color: #1a1a1a;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .scene {
   width: var(--cube-size);
   height: var(--cube-size);
-  perspective: 800px;
-  margin: 40px auto;
+  perspective: 900px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  overflow: visible; /* evita que se corte el cubo */
+  justify-content: center;
+  margin: 0 auto;
+  overflow: visible;
 }
 
 .cube-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
+  transform-origin: center center;
   overflow: visible;
 }
 
 .cube {
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
   transform-style: preserve-3d;
+  transform-origin: center center;
   transform: rotateX(-20deg) rotateY(30deg);
-  animation: spin 10s infinite linear;
+  animation: spin 10s linear infinite;
   will-change: transform;
 }
 
@@ -76,19 +86,20 @@ body {
   width: var(--cube-size);
   height: var(--cube-size);
   background: #000;
-  border: 1px solid rgba(255, 255, 255, 0.6); /* borde más suave */
+  border: 1px solid rgba(255,255,255,0.6);
   border-radius: 6px;
+  box-sizing: border-box;
   overflow: hidden;
-  box-sizing: border-box; /* asegura que el borde no expanda la cara */
+  backface-visibility: hidden; /* mejora en móviles */
 }
 
 .face img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-/* Posición de las caras */
 .face-front  { transform: translateZ(var(--half-cube)); }
 .face-back   { transform: rotateY(180deg) translateZ(var(--half-cube)); }
 .face-right  { transform: rotateY(90deg) translateZ(var(--half-cube)); }
@@ -101,14 +112,13 @@ body {
   to   { transform: rotateX(-20deg) rotateY(360deg); }
 }
 
-/* Ajustes extra para móviles muy pequeños */
-@media (max-width: 420px) {
+/* Margen y perspectiva extra para pantallas pequeñas */
+@media (max-width: 480px) {
   .scene {
-    perspective: 600px;
-    margin: 20px auto;
+    perspective: 700px;
   }
-  .face {
-    border: 1px solid rgba(255, 255, 255, 0.5);
+  .cube {
+    animation: spin 12s linear infinite;
   }
 }
 
