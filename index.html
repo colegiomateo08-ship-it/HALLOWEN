@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regalo - Cubo 3D</title>
+
+  <style>
+   body {
+  background-color: #1a1a1a; /* Oscuro para Halloween */
+  background-image: url('imagenes/fondo.png'), url('imagenes/fm.png'); /* Imagen de fondo */
+  background-size: cover, 50px 50px; /* Ocupa todo el fondo */
+  background-position: botton left, top right, center top;
+  background-repeat: no-repeat;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+  color: #fff; /* Para que el texto sea visible sobre fondo oscuro */
+}
+
+    .container {
+      margin-top: 30px;
+    }
+
+    .title {
+      font-size: 2em;
+      color: #e63946;
+    }
+
+    .scene {
+      width: 200px;
+      height: 200px;
+      perspective: 600px;
+      margin: 50px auto;
+    }
+
+    .cube-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+      transform: rotateX(-20deg) rotateY(30deg);
+      animation: spin 10s infinite linear;
+    }
+
+    .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 2px solid #fff;
+      background: #000;
+    }
+
+    .face img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .face-front  { transform: translateZ(100px); }
+    .face-back   { transform: rotateY(180deg) translateZ(100px); }
+    .face-right  { transform: rotateY(90deg) translateZ(100px); }
+    .face-left   { transform: rotateY(-90deg) translateZ(100px); }
+    .face-top    { transform: rotateX(90deg) translateZ(100px); }
+    .face-bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+    @keyframes spin {
+      from { transform: rotateX(-20deg) rotateY(0deg); }
+      to   { transform: rotateX(-20deg) rotateY(360deg); }
+    }
+
+    .controls {
+      margin-top: 30px;
+    }
+
+    button {
+      background-color: #ff6f00;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #f28ea2;
+    }
+	/* Animación de título de Halloween */
+@keyframes halloweenGlow {
+  0%   { color: #ff7518; text-shadow: 0 0 5px #ff7518; }
+  25%  { color: #ffeb3b; text-shadow: 0 0 10px #ffeb3b; }
+  50%  { color: #ff7518; text-shadow: 0 0 15px #ff7518; }
+  75%  { color: #ffeb3b; text-shadow: 0 0 10px #ffeb3b; }
+  100% { color: #ff7518; text-shadow: 0 0 5px #ff7518; }
+}
+
+.halloween-title {
+  animation: halloweenGlow 2s infinite;
+  font-size: 2.5em; /* más grande y llamativo */
+  margin-bottom: 30px;
+}
+  </style>
+</head>
+ <br> <br>
+</br> </br>
+
+<body>
+  <main class="container">
+    <h1 class="title halloween-title">¡Feliz Halloween 🎃!</h1>
+ <br> <br>
+    <div class="scene">
+      <div id="cubeWrapper" class="cube-wrapper">
+        <div id="cube" class="cube">
+          <div class="face face-front"><img src="imagenes/uno.jpg" alt="frontal"></div>
+          <div class="face face-back"><img src="imagenes/nosotros.jpg" alt="atrás"></div>
+          <div class="face face-right"><img src="imagenes/tres.jpeg" alt="derecha"></div>
+          <div class="face face-left"><img src="imagenes/cuatro.jpeg" alt="izquierda"></div>
+          <div class="face face-top"><img src="imagenes/cinco.jpeg" alt="arriba"></div>
+          <div class="face face-bottom"><img src="imagenes/seis.jpeg" alt="abajo"></div>
+        </div>
+      </div>
+    </div>
+ <br> <br>
+    <div class="controls">
+      <button id="btnToggleSpin">Detener Rotación</button>
+      <button id="btnReset">Resetear</button>
+      <button id="btnPlayPause">🎵 Reproducir</button>
+    </div>
+
+    <audio id="music" src="audio/october.mp3" preload="auto"></audio>
+  </main>
+
+  <script>
+    const cube = document.getElementById('cube');
+    const music = document.getElementById('music');
+    let spinning = true;
+
+    document.getElementById('btnToggleSpin').addEventListener('click', () => {
+      spinning = !spinning;
+      cube.style.animationPlayState = spinning ? 'running' : 'paused';
+    });
+
+    document.getElementById('btnReset').addEventListener('click', () => {
+      cube.style.transform = 'rotateX(-20deg) rotateY(30deg)';
+    });
+
+    document.getElementById('btnPlayPause').addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    });
+  </script>
+</body>
+</html>
